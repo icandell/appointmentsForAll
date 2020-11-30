@@ -31,7 +31,7 @@ $siteOwner_id = $params->resource;
 foreach ($timeline as $cell) {
   if ($start <= $cell->start && $cell->end <= $end) {
     for ($shift_start = clone $cell->start; $shift_start < $cell->end; $shift_start->add(new DateInterval("PT" . $slot_duration . "M"))) {
-      $shift_end =  clone $shift_start;
+      $shift_end = clone $shift_start;
       $shift_end->add(new DateInterval("PT" . $slot_duration . "M"));
       create_shift($shift_start->format("Y-m-d\\TH:i:s"), $shift_end->format("Y-m-d\\TH:i:s"), $siteOwner_id);
     }
