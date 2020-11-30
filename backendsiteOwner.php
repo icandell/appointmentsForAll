@@ -28,4 +28,4 @@ foreach($result as $row) {
 }
 
 header('Content-Type: application/json');
-echo json_encode($events);
+echo  json_encode($events);
