@@ -6,13 +6,9 @@
 
   <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
-  <!-- DayPilot library -->
-  <script src="js/daypilot/daypilot-all.min.js"></script>
 
 </head>
 <body>
-<?php require_once '_header.php'; ?>
-
 <div class="main">
   <?php require_once '_navigation.php'; ?>
 
@@ -29,7 +25,6 @@
   </div>
 </div>
 
-<script src="js/daypilot/daypilot-all.min.js"></script>
 
 <script>
   var nav = new DayPilot.Navigator("nav");
