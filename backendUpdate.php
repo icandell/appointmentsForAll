@@ -16,4 +16,4 @@ $response->result = 'OK';
 $response->message = 'Update successful';
 
 header('Content-Type: application/json');
-echo  json_encode($response);
+echo json_encode($response);
