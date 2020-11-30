@@ -1,10 +1,5 @@
 <?php
 
-$db_exists = file_exists("daypilot.sqlite");
-
-$db = new PDO('sqlite:daypilot.sqlite');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 // other init
 date_default_timezone_set("UTC");
 session_start();
