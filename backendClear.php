@@ -20,4 +20,4 @@ $response->message = 'Cleared';
 //$response->id = $db->lastInsertId();
 
 header('Content-Type: application/json');
-echo  json_encode($response);
+echo json_encode($response);
