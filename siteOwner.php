@@ -2,15 +2,13 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <title>Appointment Scheduling (JavaScript/PHP)</title>
+  <title>Appointment Scheduling</title>
 
   <link type="text/css" rel="stylesheet" href="css/layout.css"/>
 
-  <!-- DayPilot library -->
-  <script src="js/daypilot/daypilot-all.min.js"></script>
+
 </head>
 <body>
-<?php require_once '_header.php'; ?>
 
 <div class="main">
   <?php require_once '_navigation.php'; ?>
@@ -30,14 +28,12 @@
   </div>
 </div>
 
-<script src="js/daypilot/daypilot-all.min.js"></script>
-
 <script>
   var elements = {
     siteOwner: document.querySelector("#siteOwner")
   };
 
-  var nav = new DayPilot.Navigator("nav");
+  var nav = new Appt.Navigator("nav");
   nav.selectMode = "week";
   nav.showMonths = 3;
   nav.skipMonths = 3;
@@ -46,13 +42,13 @@
   };
   nav.init();
 
-  var calendar = new DayPilot.Calendar("calendar");
+  var calendar = new Appt.Calendar("calendar");
   calendar.viewType = "Week";
   calendar.timeRangeSelectedHandling = "Disabled";
   calendar.eventDeleteHandling = "Update";
 
   calendar.onEventMoved = function (args) {
-    DayPilot.Http.ajax({
+    Appt.Http.ajax({
       url: "backend_move.php",
       data: args,
       success: function(ajax) {
@@ -61,7 +57,7 @@
     });
   };
   calendar.onEventResized = function (args) {
-    DayPilot.Http.ajax({
+    Appt.Http.ajax({
       url: "backend_move.php",
       data: args,
       success: function(ajax) {
@@ -73,7 +69,7 @@
     var params = {
       id: args.e.id(),
     };
-    DayPilot.Http.ajax({
+    Appt.Http.ajax({
       url: "backend_delete.php",
       data: params,
       success: function (ajax) {
@@ -129,7 +125,7 @@
       focus: "text"
     };
 
-    DayPilot.Modal.form(form, data, options).then(function(modal) {
+    Appt.Modal.form(form, data, options).then(function(modal) {
       if (modal.canceled) {
         return;
       }
@@ -140,7 +136,7 @@
         status: modal.result.tags.status
       };
 
-      DayPilot.Http.ajax({
+      Appt.Http.ajax({
         url: "backend_update.php",
         data: params,
         success: function(ajax) {
@@ -163,8 +159,8 @@
       end: end.toString()
     };
 
-    DayPilot.Http.ajax({
-      url: "backend_events_siteOwner.php",
+    Appt.Http.ajax({
+      url: "backendsiteOwner.php",
       data: params,
       success: function(ajax) {
         var data = ajax.data;
@@ -185,7 +181,7 @@
   });
 
   var siteOwners = [];
-  DayPilot.Http.ajax({
+  Appt.Http.ajax({
     url: "backend_resources.php",
     success: function(ajax) {
       siteOwners = ajax.data;
