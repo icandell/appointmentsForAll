@@ -27,16 +27,16 @@
 
 
 <script>
-  var nav = new DayPilot.Navigator("nav");
+  var nav = new Appt.Navigator("nav");
   nav.selectMode = "week";
   nav.showMonths = 3;
   nav.skipMonths = 3;
   nav.onTimeRangeSelected = function (args) {
-    loadEvents(args.start.firstDayOfWeek(DayPilot.Locale.find(nav.locale).weekStarts), args.start.addDays(7));
+    loadEvents(args.start.firstDayOfWeek(Appt.Locale.find(nav.locale).weekStarts), args.start.addDays(7));
   };
   nav.init();
 
-  var calendar = new DayPilot.Calendar("calendar");
+  var calendar = new Appt.Calendar("calendar");
   calendar.viewType = "Week";
   calendar.timeRangeSelectedHandling = "Disabled";
   calendar.eventMoveHandling = "Disabled";
@@ -94,12 +94,12 @@
       focus: "name"
     };
 
-    DayPilot.Modal.form(form, data, options).then(function(modal) {
+    Appt.Modal.form(form, data, options).then(function(modal) {
         if (modal.canceled) {
           return;
         }
 
-        DayPilot.Http.ajax({
+        Appt.Http.ajax({
           url: "backend_request_save.php",
           data: modal.result,
           success: function(ajax) {
@@ -115,14 +115,14 @@
   loadEvents();
 
   function loadEvents(day) {
-    var start = nav.visibleStart() > new DayPilot.Date() ? nav.visibleStart() : new DayPilot.Date();
+    var start = nav.visibleStart() > new Appt.Date() ? nav.visibleStart() : new Appt.Date();
 
     var params = {
       start: start.toString(),
       end: nav.visibleEnd().toString()
     };
 
-    DayPilot.Http.ajax({
+    Appt.Http.ajax({
       url: "backend_events_free.php",
       data: params,
       success: function(ajax) {
